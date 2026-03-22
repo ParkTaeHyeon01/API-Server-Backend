@@ -136,6 +136,24 @@ app.post('/login', async (req, res) => {
     }
 });
 
+// 1. 특정 영화의 리뷰 목록 조회 (uid 추가)
+app.get('/reviews/:movie_id', async (req, res) => {
+    const { data, error } = await supabase
+        .from('review')
+        .select(`
+            review_id, 
+            review_text, 
+            review_time,
+            uid, 
+            user ( name )
+        `)
+        .eq('movie_id', req.params.movie_id)
+        .order('review_time', { ascending: false });
+
+    if (error) return res.status(500).json({ error: error.message });
+    res.json(data);
+});
+
 
 // 2. 리뷰 등록 API
 app.post('/reviews', async (req, res) => {
@@ -167,24 +185,6 @@ app.post('/reviews', async (req, res) => {
         // 여기서도 e.message가 null일 수 있으므로 안전하게 처리
         return res.status(500).json({ error: e?.message || "Internal Server Error" });
     }
-});
-
-// 1. 특정 영화의 리뷰 목록 조회 (uid 추가)
-app.get('/reviews/:movie_id', async (req, res) => {
-    const { data, error } = await supabase
-        .from('review')
-        .select(`
-            review_id, 
-            review_text, 
-            review_time,
-            uid, 
-            user ( name )
-        `)
-        .eq('movie_id', req.params.movie_id)
-        .order('review_time', { ascending: false });
-
-    if (error) return res.status(500).json({ error: error.message });
-    res.json(data);
 });
 
 // 3. 리뷰 수정 API
