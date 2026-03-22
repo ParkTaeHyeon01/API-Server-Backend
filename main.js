@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import { createClient } from '@supabase/supabase-js';
 import { formatedMovie, formatedMovieDetail } from './app/format_movie.js';
@@ -5,13 +6,12 @@ import { formatedWeather } from './app/format_weather.js';
 import { formatedExchange } from './app/format_exchange.js';
 
 const app = express();
+const { SUPABASE_URL, SUPABASE_KEY } = process.env;
 const PORT = 3000;
 
 app.use(express.json());
 
 // Supabase 설정
-const SUPABASE_URL = 'https://ivvjyxqmzvoeqozrzyhv.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_IiuZAyHX5Ut9ovP5a795wg_nPDVS-SG';
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 app.get('/', (req, res) => {
