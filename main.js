@@ -16,7 +16,7 @@ app.use(express.json());
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 app.get('/', (req, res) => {
-    res.json({ message: "API Server is Running" });
+    res.json({ message: "Team8 API Server is Running" });
 });
 
 app.get('/movies/search', async (req, res) => {
