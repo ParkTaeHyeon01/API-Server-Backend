@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const KMA_AUTH_KEY = "0gA_V960RKqAP1fetBSqoA";
+const { KMA_AUTH_KEY } = process.env;
 
 export async function getGridCoords(lon, lat) {
     const url = `https://apihub.kma.go.kr/api/typ01/cgi-bin/url/nph-dfs_xy_lonlat?lon=${lon}&lat=${lat}&help=0&authKey=${KMA_AUTH_KEY}`;

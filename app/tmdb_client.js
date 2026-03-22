@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const TMDB_API_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYmVhYzhiMGRkODVjZDJmNTQzNjM1MzY2ZjUxM2I2MiIsIm5iZiI6MTc3Mjg2NTU2MC4xNjMsInN1YiI6IjY5YWJjODE4Y2RlMTUxYmY1OTdlY2YzZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.DmXa9x0Bxbri1P6hcbAHFcYqTQh0HG5iB4088Nbh_7Y";
+const { TMDB_API_KEY } = process.env;
 
 export async function searchMovieFromTmdb(query) {
     const url = "https://api.themoviedb.org/3/search/movie";

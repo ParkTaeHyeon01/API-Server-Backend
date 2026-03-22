@@ -1,17 +1,18 @@
+import 'dotenv/config';
 import express from 'express';
 import { createClient } from '@supabase/supabase-js';
 import { formatedMovie, formatedMovieDetail } from './app/format_movie.js';
 import { formatedWeather } from './app/format_weather.js';
 import { formatedExchange } from './app/format_exchange.js';
+import { sendJoinNotification } from './slack.js';
 
 const app = express();
+const { SUPABASE_URL, SUPABASE_KEY } = process.env;
 const PORT = 3000;
 
 app.use(express.json());
 
 // Supabase 설정
-const SUPABASE_URL = 'https://ivvjyxqmzvoeqozrzyhv.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_IiuZAyHX5Ut9ovP5a795wg_nPDVS-SG';
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 app.get('/', (req, res) => {
@@ -92,8 +93,10 @@ app.post('/join', async (req, res) => {
             .select();
 
         if (error) throw error;
-
         res.status(201).json({ message: "회원가입 성공", user: data });
+        console.log(`'${nickname}' 님이 가입하셨습니다. [${new Date().toLocaleString()}]`);
+        // ✅ 슬랙 알림 보내기 (비동기로 실행)
+        sendJoinNotification(nickname);
     } catch (error) {
         console.error("회원가입 에러:", error.message);
         res.status(500).json({ error: "회원가입 중 오류가 발생했습니다." });

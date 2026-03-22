@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const { authKey } = process.env;
+
 export async function getExchangeByDate(targetDate) {
-    const authKey = "GDuUSw33baa0MSLn6VxpJHwYnyfPXLBB";
+    
     const url = `https://oapi.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=${authKey}&searchdate=${targetDate}&data=AP01`;
     
     try {
