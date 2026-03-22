@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const { authKey } = process.env;
+const { Koreaexim_KEY } = process.env;
 
 export async function getExchangeByDate(targetDate) {
     
-    const url = `https://oapi.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=${authKey}&searchdate=${targetDate}&data=AP01`;
+    const url = `https://oapi.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=${Koreaexim_KEY}&searchdate=${targetDate}&data=AP01`;
     
     try {
         const response = await axios.get(url);
