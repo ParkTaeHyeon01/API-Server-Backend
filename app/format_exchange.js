@@ -1,4 +1,4 @@
-import { getExchangeByDate } from './oapikorea_client.js';
+import { getExchangeByDate } from './koreaexim_client.js';
 
 function formatDateObjToString(dateObj) {
     const yyyy = dateObj.getFullYear();
