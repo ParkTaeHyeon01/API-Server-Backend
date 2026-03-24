@@ -8,7 +8,7 @@ import { sendJoinNotification } from './slack.js';
 
 const app = express();
 const { SUPABASE_URL, SUPABASE_KEY } = process.env;
-const PORT = 3000;
+const PORT = 443;
 
 app.use(express.json());
 
