@@ -151,6 +151,7 @@ app.get('/reviews/:movie_id', async (req, res) => {
         .order('review_time', { ascending: false });
 
     if (error) return res.status(500).json({ error: error.message });
+    console.log(`'리뷰 목록을 조회했습니다. [${new Date().toLocaleString()}]`);
     res.json(data);
 });
 
@@ -177,6 +178,7 @@ app.post('/reviews', async (req, res) => {
         }
 
         // 성공 시 (error가 null인 경우)
+        console.log(`'리뷰를 등록 했습니다. [${new Date().toLocaleString()}]`);
         return res.status(201).json({ message: "리뷰 등록 완료" });
 
     } catch (e) {
@@ -198,6 +200,7 @@ app.put('/reviews/:review_id', async (req, res) => {
         .eq('uid', parseInt(uid))
         .select();
     if (error) return res.status(400).json({ error: error.message });
+    console.log(`'리뷰를 수정 했습니다. [${new Date().toLocaleString()}]`);
     res.json({ message: "수정 성공", data });
 });
 
@@ -211,6 +214,7 @@ app.delete('/reviews/:review_id', async (req, res) => {
         .eq('review_id', review_id)
         .eq('uid', parseInt(uid));
     if (error) return res.status(400).json({ error: error.message });
+    console.log(`'리뷰를 삭제 했습니다. [${new Date().toLocaleString()}]`);
     res.json({ message: "삭제 성공" });
 });
 
